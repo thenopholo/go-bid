@@ -1,12 +1,22 @@
 package handler
 
-import "net/http"
+import (
+	"net/http"
 
-type Handler struct{}
+	"github.com/thenopholo/go-bid/internal/config"
+)
 
-func NewHandlre() *Handler {
-  return &Handler{}
+type Handler struct{
+  logger *config.Logger
 }
+
+func NewHandlrer() *Handler  {
+  logger := config.NewLogger("HANDLER")
+  return &Handler{
+  	logger: logger,
+  }
+}
+
 
 func HealthCheck(w http.ResponseWriter, r *http.Request) {
   w.Write([]byte("OK"))

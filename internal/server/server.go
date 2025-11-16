@@ -24,7 +24,7 @@ type Server struct {
 func NewServer() *Server {
 	logger := config.NewLogger("SERVER")
 	r := chi.NewRouter()
-	h := handler.NewHandlre()
+	h := handler.NewHandlrer()
 	port := os.Getenv("SERVER_PORT")
 
 	s := &http.Server{
