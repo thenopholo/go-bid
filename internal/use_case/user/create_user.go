@@ -9,7 +9,7 @@ import (
 type CreateUserReq struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
-	Password []byte `json:"password"`
+	Password string `json:"password"`
 	Bio      string `json:"bio"`
 }
 
