@@ -9,8 +9,10 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/thenopholo/go-bid/internal/config"
 	"github.com/thenopholo/go-bid/internal/handler"
+	"github.com/thenopholo/go-bid/internal/service"
 )
 
 type Server struct {
@@ -21,10 +23,11 @@ type Server struct {
 	logger  *config.Logger
 }
 
-func NewServer() *Server {
+func NewServer(pool *pgxpool.Pool) *Server {
 	logger := config.NewLogger("SERVER")
 	r := chi.NewRouter()
-	h := handler.NewHandlrer()
+	userService := service.NewUserService(pool)
+	h := handler.NewHandlrer(userService)
 	port := os.Getenv("SERVER_PORT")
 
 	s := &http.Server{
